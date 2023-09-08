@@ -14,7 +14,7 @@ metadata:
     #   url: https://discord.com/invite/EBHEGzX
   annotations:
     # github.com/project-slug: backstage/backstage
-    backstage.io/techdocs-ref: http://localhost:8080/swagger-ui
+    backstage.io/techdocs-ref: http://localhost:8080/swagger-ui/index.html
     # lighthouse.com/website-url: https://backstage.io
 spec:
   type: microservice

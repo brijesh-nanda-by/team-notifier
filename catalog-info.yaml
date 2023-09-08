@@ -20,3 +20,5 @@ spec:
   type: microservice
   owner: user:guest
   lifecycle: experimental
+  targets:
+    - ./apis/teams-notifier-apis.yaml

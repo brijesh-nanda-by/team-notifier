@@ -20,5 +20,7 @@ spec:
   type: service
   owner: user:guest
   lifecycle: experimental
+  definition: 
+    $text: ./apis/teams-notifier-apis.yaml
   targets:
     - ./apis/teams-notifier-apis.yaml

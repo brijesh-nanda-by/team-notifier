@@ -3,14 +3,62 @@ info:
   title: OpenAPI definition
   version: v0
 servers:
-- url: http://localhost:8080
+- url: http://localhost:8081
   description: Generated server url
 paths:
+  /readyLine/update/{mva}:
+    put:
+      tags:
+      - ready-line-controller
+      operationId: vehicleInfoUpdate
+      parameters:
+      - name: mva
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleInfo'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /readyLine/addVehicle:
+    post:
+      tags:
+      - ready-line-controller
+      operationId: addVehicleToFleet
+      parameters:
+      - name: location
+        in: query
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleInfo'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VehicleAddConfirmation'
   /notify:
     post:
       tags:
-      - authorization-controller
-      operationId: getToken
+      - notification-controller
+      operationId: notifyTeams_1
       parameters:
       - name: code
         in: query
@@ -27,14 +75,6 @@ paths:
         required: false
         schema:
           type: string
-      responses:
-        "200":
-          description: OK
-  /:
-    post:
-      tags:
-      - notification-controller
-      operationId: notifyTeams_1
       requestBody:
         content:
           application/json:
@@ -48,8 +88,114 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ChatMessage'
+  /checkout/complete/{reservationId}:
+    post:
+      tags:
+      - checkout-controller
+      operationId: completeCheckout
+      parameters:
+      - name: reservationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: location
+        in: query
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutDetails'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CheckoutConfirmationMessage'
+  /readyLine:
+    get:
+      tags:
+      - ready-line-controller
+      operationId: getListOfVehiclesInReadyLine
+      parameters:
+      - name: location
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleInfo'
+  /checkout/{confirmationNumber}:
+    get:
+      tags:
+      - checkout-controller
+      operationId: getCheckout
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CheckoutDetails'
+  /readyLine/delete:
+    delete:
+      tags:
+      - ready-line-controller
+      operationId: removeVehicleFromReadyLine
+      parameters:
+      - name: mva
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
 components:
   schemas:
+    VehicleInfo:
+      type: object
+      properties:
+        registrationNumber:
+          type: string
+        mva:
+          type: string
+        carGroup:
+          type: string
+          enum:
+          - A
+          - B
+          - C
+          - D
+        location:
+          type: string
+    VehicleAddConfirmation:
+      type: object
+      properties:
+        confirmationNumber:
+          type: string
+        mva:
+          type: string
+        transactionId:
+          type: string
     NotificationRequest:
       type: object
       properties:
@@ -359,13 +505,13 @@ components:
       properties:
         logger:
           $ref: '#/components/schemas/ILogger'
+        serviceSDKVersion:
+          type: string
         serializer:
           $ref: '#/components/schemas/ISerializer'
-        serviceRoot:
-          type: string
         httpProvider:
           $ref: '#/components/schemas/IHttpProviderObject'
-        serviceSDKVersion:
+        serviceRoot:
           type: string
     IHttpProviderObject:
       type: object
@@ -421,3 +567,36 @@ components:
           - CHAT
           - UNKNOWN_FUTURE_VALUE
           - UNEXPECTED_VALUE
+    CheckoutDetails:
+      type: object
+      properties:
+        reservationNumber:
+          type: string
+        name:
+          type: string
+        address:
+          type: string
+        number:
+          type: string
+        carGroup:
+          type: string
+          enum:
+          - A
+          - B
+          - C
+          - D
+        insuranceCost:
+          type: string
+        mva:
+          type: string
+    CheckoutConfirmationMessage:
+      type: object
+      properties:
+        transactionAmount:
+          type: string
+        checkoutSuccessful:
+          type: boolean
+        confirmationNumber:
+          type: string
+        mva:
+          type: string

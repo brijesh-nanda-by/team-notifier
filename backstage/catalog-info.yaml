@@ -17,7 +17,7 @@ metadata:
     # - title: Discord Chat
     #   url: https://discord.com/invite/EBHEGzX
 spec:
-  type: website
+  type: service
   owner: group:rental-nam
   lifecycle: experimental
   consumesApi: 

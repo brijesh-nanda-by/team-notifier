@@ -19,6 +19,7 @@ metadata:
 spec:
   type: service
   owner: group:rental-nam
+  system: system:RentalCapabilities
   lifecycle: experimental
   consumesApi: 
     - TeamsNotifier

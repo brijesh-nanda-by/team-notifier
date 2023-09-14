@@ -20,4 +20,5 @@ spec:
   type: website
   owner: rental-nam
   lifecycle: experimental
-  consumesApi: TeamsNotifier
+  consumesApi: 
+    - TeamsNotifier

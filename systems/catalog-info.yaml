@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: RentalCapabilities
+  description: System which allows agents to perform actions like checkout, checkin etc..
+spec:
+  owner: rentals-nam
+  domain: rentals

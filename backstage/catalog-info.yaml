@@ -25,5 +25,3 @@ spec:
   owner: rental-nam
   lifecycle: experimental
   consumesApi: TeamsNotifier
-  definition: 
-    $text: ./apis/teams-notifier-apis.yaml

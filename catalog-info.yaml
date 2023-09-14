@@ -21,5 +21,7 @@ spec:
   owner: user:guest
   system: system:RentalCapabilities
   lifecycle: experimental
+  consumesApi: 
+    - RentalService
   definition: 
     $text: ./apis/teams-notifier-apis.yaml

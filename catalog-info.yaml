@@ -22,6 +22,6 @@ spec:
   system: system:RentalCapabilities
   lifecycle: experimental
   consumesApi: 
-    - RentalService
+    - component:default/RentalService
   definition: 
     $text: ./apis/teams-notifier-apis.yaml

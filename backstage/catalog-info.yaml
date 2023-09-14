@@ -21,5 +21,5 @@ spec:
   owner: group:rental-nam
   system: system:RentalCapabilities
   lifecycle: experimental
-  consumesApi: 
+  dependsOn: 
     - TeamsNotifier

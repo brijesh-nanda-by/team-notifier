@@ -18,7 +18,7 @@ metadata:
     #   url: https://discord.com/invite/EBHEGzX
 spec:
   type: website
-  owner: rental-nam
+  owner: group:rental-nam
   lifecycle: experimental
   consumesApi: 
     - TeamsNotifier

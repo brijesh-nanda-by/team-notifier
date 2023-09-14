@@ -19,6 +19,7 @@ metadata:
 spec:
   type: openapi
   owner: user:guest
+  system: system:RentalCapabilities
   lifecycle: experimental
   definition: 
     $text: ./apis/teams-notifier-apis.yaml

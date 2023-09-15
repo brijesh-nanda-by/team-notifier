@@ -22,4 +22,4 @@ spec:
   system: system:RentalCapabilities
   lifecycle: experimental
   dependsOn: 
-    - api:default/TeamsNotifier
+    - api:default/WAND
